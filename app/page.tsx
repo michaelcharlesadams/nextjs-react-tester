@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/alert"
 
 
-export function AlertMessage() {
+function AlertMessage() {
   return (
     <Alert> 
       <AlertTitle>Oops!</AlertTitle>
