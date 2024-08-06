@@ -1,16 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-
- type Company = {
-    id: string;
-    name: string;
-    description: string;
-    location: string;
-    website: string;
-    revenue: number;
-    employees: number;
-};
+import { Company } from '@/types';
 
 
 const useCompanies = () => {
@@ -18,7 +9,7 @@ const useCompanies = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchCompanies = async () => {
             try {
                 const response = await fetch('/api/companies');
                 if (!response.ok) throw new Error('Network response was not ok');
@@ -27,11 +18,11 @@ const useCompanies = () => {
                 setCompanies(data);
             } catch (err: any) {
                 setError(err.message);
-                alert(`An error occurred: ${err.message}`);
+                //alert(`An error occurred: ${err.message}`);
             }
         };
 
-        fetchData();
+        fetchCompanies();
     }, []); // Empty dependency array ensures this runs only once
 
     return { companies, error };

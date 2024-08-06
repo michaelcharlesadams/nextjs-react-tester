@@ -8,20 +8,8 @@ import {
     TableHeader,
     TableRow,
   } from './table';
-
-  export interface Company {
-    id: string;
-    name: string;
-    description: string;
-    location: string;
-    website: string;
-    revenue: number;
-    employees: number;
-  }
-  
-  export interface CompanyTableProps {
-    companies: Company[];
-  }
+  import { Company } from '@/lib/types';
+  import { CompanyTableProps } from '@/lib/types';
   
   const CompanyTable: React.FC<CompanyTableProps> = ({ companies }) => {
     // Calculate totals

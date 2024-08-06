@@ -9,13 +9,26 @@ import {
 } from "@/components/ui/card";
 import useCompanies from "@/lib/useCompanies";
 import CompanyTable from "@/components/ui/company-table"; // Adjust the path as needed
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+
+export function AlertMessage() {
+  return (
+    <Alert> 
+      <AlertTitle>Oops!</AlertTitle>
+      <AlertDescription>
+        There was a problem loading the data. 
+        Please try again later.
+      </AlertDescription>
+    </Alert>
+  )
+}
 
 export default function Home() {
   const { companies, error } = useCompanies();
-
-  if (error) {
-    return <div>Error loading data: {error}</div>;
-  }
 
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-tl from-blue-400 to-blue-700 text-white space-y-6">
@@ -33,7 +46,11 @@ export default function Home() {
             <CardDescription>Overview of active companies with basic details.</CardDescription>
           </CardHeader>
           <CardContent>
-            <CompanyTable companies={companies} />
+            {error ? (
+                <AlertMessage />
+              ) : (
+                <CompanyTable companies={companies} />
+              )}
           </CardContent>
         </Card>
       </div>
