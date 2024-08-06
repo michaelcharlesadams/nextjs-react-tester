@@ -1,5 +1,7 @@
 'use client'
 
+import useCompanies from "@/lib/useCompanies";
+import CompanyTable from "@/components/ui/company-table";
 import {
   Card,
   CardContent,
@@ -7,13 +9,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import useCompanies from "@/lib/useCompanies";
-import CompanyTable from "@/components/ui/company-table"; // Adjust the path as needed
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert"
+
 
 export function AlertMessage() {
   return (
@@ -28,7 +29,7 @@ export function AlertMessage() {
 }
 
 export default function Home() {
-  const { companies, error } = useCompanies();
+  const { companies,  loading, error } = useCompanies();
 
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-tl from-blue-400 to-blue-700 text-white space-y-6">
@@ -46,11 +47,11 @@ export default function Home() {
             <CardDescription>Overview of active companies with basic details.</CardDescription>
           </CardHeader>
           <CardContent>
-            {error ? (
-                <AlertMessage />
-              ) : (
-                <CompanyTable companies={companies} />
-              )}
+          { error ? (
+              <AlertMessage />
+            ) : (
+              <CompanyTable companies={companies} loading={loading} />
+            )}
           </CardContent>
         </Card>
       </div>
